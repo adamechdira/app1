@@ -1,0 +1,6 @@
+{
+  "name": "Tawasol P2P - Local Peer-to-Peer Communication",
+  "description": "Direct device-to-device communication app (P2P) over local network without server relay, like original Skype, supporting chat, voice/video calls, and file sharing on PC & Phone.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

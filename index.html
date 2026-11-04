@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        try {
+          var originalFetch = window.fetch ? window.fetch.bind(window) : null;
+          var currentFetch = originalFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return currentFetch;
+            },
+            set: function(fn) {
+              currentFetch = fn;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {}
+
+        window.addEventListener('error', function(event) {
+          if (
+            event &&
+            (
+              (event.message && (
+                event.message.indexOf('Cannot set property fetch') !== -1 ||
+                event.message.indexOf('fetch of #<Window>') !== -1
+              )) ||
+              (event.filename && event.filename.indexOf('chrome-extension://') === 0)
+            )
+          ) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return true;
+          }
+        }, true);
+      })();
+    </script>
+    <title>Tawasol P2P | تواصل محلي مباشر جهاز لجهاز</title>
+    <meta name="description" content="تطبيق تواصل محلي مباشر بين الأجهزة (P2P) بدون خادم وسيط على غرار سكايب القديم للكمبيوتر والهاتف." />
+    <meta property="og:title" content="Tawasol P2P | تواصل محلي مباشر جهاز لجهاز" />
+    <meta property="og:description" content="Direct device-to-device P2P communication without server relay, supporting chat, calls, and file transfer on PC & Phone." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
